@@ -1,11 +1,14 @@
 package com.example.cromarmot.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.example.cromarmot.myapplication.Adapter.FriendCircleAdapter;
 import com.example.cromarmot.myapplication.Data.*;
 import com.example.cromarmot.myapplication.View.*;
 
@@ -14,7 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements FcScrollerListener {
+public class FriendCircleActivity extends AppCompatActivity implements FcScrollerListener {
     public static final int CURRENTUSERID = 0;
 
     private int lastget = 0;
@@ -33,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements FcScrollerListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mContext = MainActivity.this;
+        mContext = FriendCircleActivity.this;
         FakeDataRequest.setContext(mContext);
         lcpw = new LikeCommentPopupWindow(mContext);
 
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements FcScrollerListene
 
         LinkedList<PostEach> newpostdata= FakeDataRequest.getPostListFrom(lastget++);
         mData.addAll(newpostdata);
-        mUsermap.put(MainActivity.CURRENTUSERID, FakeDataRequest.getUser(MainActivity.CURRENTUSERID));
+        mUsermap.put(FriendCircleActivity.CURRENTUSERID, FakeDataRequest.getUser(FriendCircleActivity.CURRENTUSERID));
         PostDataManager.autoUpdateUsersByNewPost(newpostdata);
 
         list_fc.setAdapter(mAdapter);
@@ -75,5 +78,21 @@ public class MainActivity extends AppCompatActivity implements FcScrollerListene
                 list_fc.hideFooterView();
             }
         }.execute(new Void[]{});
+    }
+
+    @Override
+    protected void onActivityResult( int requestCode, int resultCode, Intent data )
+    {
+        switch ( resultCode ) {
+            case RESULT_OK :
+                String shareUrl = data.getExtras().getString("ShareUrl");
+                if(shareUrl != null){
+                    PostDataManager.shareWebSite(shareUrl);
+                }
+                break;
+            default :
+                break;
+        }
+
     }
 }

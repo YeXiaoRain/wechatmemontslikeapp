@@ -1,11 +1,12 @@
 package com.example.cromarmot.myapplication.Data;
 
-import com.example.cromarmot.myapplication.MainActivity;
-import com.example.cromarmot.myapplication.View.FriendCircleAdapter;
+import com.example.cromarmot.myapplication.FriendCircleActivity;
+import com.example.cromarmot.myapplication.Adapter.FriendCircleAdapter;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by cromarmot on 17-7-3.
@@ -63,7 +64,7 @@ public class PostDataManager {
     static public void addComments(int postindex,int touserid,String data){
         PostEach post = getPostByIndex(postindex);
         List<CommentEach> comments =  post.getComments();
-        comments.add(new CommentEach(MainActivity.CURRENTUSERID,touserid,data));
+        comments.add(new CommentEach(FriendCircleActivity.CURRENTUSERID,touserid,data));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -114,8 +115,17 @@ public class PostDataManager {
     }
 
     public static String uid2uname(int uid){
+        assert (mUsermap.containsKey(uid));
         UserEach u = mUsermap.get(new Integer(uid));
         return u==null?"WRONG USER":u.getUname();
     }
 
+    public static void shareWebSite(String url){
+        System.out.println("sssssssfff:"+url);
+        assert (url!=null && !url.equals(""));
+        System.out.println(mPostData.size());
+        mPostData.add(0,new PostEach(FriendCircleActivity.CURRENTUSERID, new Random().nextInt(),url,"","1 min ago",url,null,null));
+        System.out.println(mPostData.size());
+        mAdapter.notifyDataSetChanged();
+    }
 }

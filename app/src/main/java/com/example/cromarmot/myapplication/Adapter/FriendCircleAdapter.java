@@ -1,7 +1,10 @@
-package com.example.cromarmot.myapplication.View;
+package com.example.cromarmot.myapplication.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,18 +12,24 @@ import android.widget.BaseAdapter;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.cromarmot.myapplication.Data.CommentEach;
 import com.example.cromarmot.myapplication.Data.PostEach;
-import com.example.cromarmot.myapplication.MainActivity;
+import com.example.cromarmot.myapplication.FriendCircleActivity;
 import com.example.cromarmot.myapplication.Data.PostDataManager;
 import com.example.cromarmot.myapplication.R;
 import com.example.cromarmot.myapplication.Data.UserEach;
+import com.example.cromarmot.myapplication.ShareActivity;
+import com.example.cromarmot.myapplication.View.CommentEachView;
+import com.example.cromarmot.myapplication.View.OnClickDisplayImgView;
+import com.example.cromarmot.myapplication.View.WrapViewGroup;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * Created by cromarmot on 17-7-5.
@@ -80,7 +89,14 @@ public class FriendCircleAdapter extends BaseAdapter{
         img_avatar.setImageBitmap(u.getUimage());
         txt_uname.setText(u.getUname());
 
-        txt_pdetail.setText(correspondingdata.getData());
+        String da = correspondingdata.getData();
+        if(da!=null && !da.equals("")) {
+            txt_pdetail.setText(correspondingdata.getData());
+            txt_pdetail.setVisibility(View.VISIBLE);
+        }else{
+            txt_pdetail.setVisibility(View.GONE);
+        }
+
         txt_ptime.setText(correspondingdata.getDate());
         txt_pinfo.setText(correspondingdata.getSpecial());
 
@@ -123,11 +139,11 @@ public class FriendCircleAdapter extends BaseAdapter{
             public void onClick(View v) {
                 PostEach.currentPostIndex = (Integer) ((LinearLayout)v.getParent().getParent().getParent()).getTag();
 
-                boolean isliked = PostDataManager.isLiked(MainActivity.CURRENTUSERID, PostEach.currentPostIndex);
+                boolean isliked = PostDataManager.isLiked(FriendCircleActivity.CURRENTUSERID, PostEach.currentPostIndex);
 
                 int[] location = new int[2];
                 v.getLocationOnScreen(location);
-                MainActivity.lcpw.show(location,isliked);
+                FriendCircleActivity.lcpw.show(location,isliked);
             }
         });
 
@@ -151,7 +167,7 @@ public class FriendCircleAdapter extends BaseAdapter{
         for (j=0;j<maxj;j++){
             CommentEach tmp_comment = comments.get(j);
             CommentEachView cev=new CommentEachView(mContext);
-            cev.init(tmp_comment.getFromid() == MainActivity.CURRENTUSERID ,i,j);
+            cev.init(tmp_comment.getFromid() == FriendCircleActivity.CURRENTUSERID ,i,j);
             cev.setText(PostDataManager.uid2uname(tmp_comment.getFromid())
                     +" write to "
                     +PostDataManager.uid2uname(tmp_comment.getToid())
@@ -160,6 +176,28 @@ public class FriendCircleAdapter extends BaseAdapter{
             llayout_comment.addView(cev);
         }
 
+        RelativeLayout rl = (RelativeLayout)view.findViewById(R.id.sharebox);
+        TextView tv_shareurl = (TextView)view.findViewById(R.id.posteachurl);
+
+        String shareurl = correspondingdata.getShareUrl();
+        if(shareurl != null && !shareurl.equals("")){
+            rl.setVisibility(View.VISIBLE);
+            tv_shareurl.setText(shareurl);
+            rl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String su = ((TextView)v.findViewById(R.id.posteachurl)).getText().toString();
+                    Intent intent =new Intent(mContext,ShareActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putString("ShareUrl", su);
+                    intent.putExtras(bundle);
+                    ((AppCompatActivity) mContext).startActivityForResult(intent,0);
+                }
+            });
+
+        }else{
+            rl.setVisibility(View.GONE);
+        }
         return view;
     }
 }

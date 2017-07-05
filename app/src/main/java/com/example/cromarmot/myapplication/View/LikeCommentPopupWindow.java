@@ -11,7 +11,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.cromarmot.myapplication.Data.PostEach;
-import com.example.cromarmot.myapplication.MainActivity;
+import com.example.cromarmot.myapplication.FriendCircleActivity;
 import com.example.cromarmot.myapplication.Data.PostDataManager;
 import com.example.cromarmot.myapplication.R;
 
@@ -56,9 +56,9 @@ public class LikeCommentPopupWindow extends PopupWindow {
         txt_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.lcpw.dismiss();
+                FriendCircleActivity.lcpw.dismiss();
                 if(PostEach.currentPostIndex!=-1){
-                    PostDataManager.likes(MainActivity.CURRENTUSERID, PostEach.currentPostIndex);
+                    PostDataManager.likes(FriendCircleActivity.CURRENTUSERID, PostEach.currentPostIndex);
                 }
             }
         });
@@ -66,9 +66,9 @@ public class LikeCommentPopupWindow extends PopupWindow {
         txt_unlike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.lcpw.dismiss();
+                FriendCircleActivity.lcpw.dismiss();
                 if(PostEach.currentPostIndex!=-1){
-                    PostDataManager.unlike(MainActivity.CURRENTUSERID, PostEach.currentPostIndex);
+                    PostDataManager.unlike(FriendCircleActivity.CURRENTUSERID, PostEach.currentPostIndex);
                 }
             }
         });
@@ -76,7 +76,7 @@ public class LikeCommentPopupWindow extends PopupWindow {
         txt_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.lcpw.dismiss();
+                FriendCircleActivity.lcpw.dismiss();
                 if(PostEach.currentPostIndex!=-1){
                     CommentPopupWindow cpw=new CommentPopupWindow(mContext);
                     cpw.show(PostEach.currentPostIndex, PostDataManager.getPostByIndex(PostEach.currentPostIndex).getUid());

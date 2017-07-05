@@ -24,7 +24,7 @@ public class FakeDataRequest {
             case 0:{
                 LinkedList<PostEach> mData = new LinkedList<PostEach>();
 
-                mData.add(new PostEach(1, 12,null,"post data here","1 hour ago","",new ArrayList<Integer>(){{add(4);add(2);add(3);add(5);add(6);add(7);add(8);}},null));
+                mData.add(new PostEach(1, 12,"post data here","1 hour ago","",new ArrayList<Integer>(){{add(4);add(2);add(3);add(5);add(6);add(7);add(8);}},null));
 
                 Bitmap[] bm_picsingle;
                 bm_picsingle=new Bitmap[1];
@@ -38,37 +38,37 @@ public class FakeDataRequest {
                 bm_picmul[2]=BitmapFactory.decodeResource(mContext.getResources(), R.drawable.p1);
                 bm_picmul[3]=BitmapFactory.decodeResource(mContext.getResources(), R.drawable.p1);
                 bm_picmul[4]=BitmapFactory.decodeResource(mContext.getResources(), R.drawable.p2);
-                mData.add(new PostEach(3, 32,bm_picmul,"neirongneirongneirongneirongneirongneirongneirong","10:20年","from alipay",new ArrayList<Integer>(){{add(3);add(5);add(7);}},null));
+                mData.add(new PostEach(3, 32,bm_picmul,"neirongneirongneirongneirongneirongneirongneirong","10:20","from alipay",new ArrayList<Integer>(){{add(3);add(5);add(7);}},null));
 
                 List<CommentEach> democomment = new ArrayList<>();
                 democomment.add(new CommentEach(2,3,"hello"));
                 democomment.add(new CommentEach(3,2,"thank you"));
                 democomment.add(new CommentEach(4,3,"thank you very much ! !! ! !! ! !!!"));
-                mData.add(new PostEach(4, 42,null,"demotextdemotext","3 hours ago","",null,democomment));
+                mData.add(new PostEach(4, 42,"demotextdemotext","3 hours ago","",null,democomment));
 
-                mData.add(new PostEach(5, 52,null,"demotextdemotextdemotextdemotextdemotext","3 hours ago","",null,null));
-                mData.add(new PostEach(6, 62,null,"demotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotext","3 hours ago","",null,null));
-                mData.add(new PostEach(7, 72,null,"demotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotext","3 hours ago","from firefox",null,null));
+                mData.add(new PostEach(5, 52, "https://exxxxample","demotextdemotextdemotextdemotextdemotext","3 hours ago","",null,null));
+                mData.add(new PostEach(6, 62,"demotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotext","3 hours ago","",null,null));
+                mData.add(new PostEach(7, 72,"demotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotext","3 hours ago","from firefox",null,null));
                 return mData;
             }
             case 1: {
                 LinkedList<PostEach> mData = new LinkedList<PostEach>();
-                mData.add(new PostEach(1, 221, null, "新增2-1", "5hours ago", "", null, null));
-                mData.add(new PostEach(2, 222, null, "新增2-2", "5hours ago", "from chrome", null, null));
-                mData.add(new PostEach(3, 223, null, "新增2-3", "5hours ago", "", null, null));
-                mData.add(new PostEach(4, 224, null, "新增2-4", "5hours ago", "", null, null));
-                mData.add(new PostEach(5, 225, null, "新增2-5", "5hours ago", "", null, null));
-                mData.add(new PostEach(6, 226, null, "新增2-6", "5hours ago", "", null, null));
+                mData.add(new PostEach(1, 221, "新增2-1", "5hours ago", "", null, null));
+                mData.add(new PostEach(2, 222, "新增2-2", "5hours ago", "from chrome", null, null));
+                mData.add(new PostEach(3, 223, "新增2-3", "5hours ago", "", null, null));
+                mData.add(new PostEach(4, 224, "新增2-4", "5hours ago", "", null, null));
+                mData.add(new PostEach(5, 225, "新增2-5", "5hours ago", "", null, null));
+                mData.add(new PostEach(6, 226, "新增2-6", "5hours ago", "", null, null));
                 return mData;
             }
             case 2: {
                 LinkedList<PostEach> mData = new LinkedList<PostEach>();
-                mData.add(new PostEach(1, 331, null, "3新增-1", "5hours ago", "", null, null));
-                mData.add(new PostEach(2, 332, null, "3新增-2", "5hours ago年", "", null, null));
-                mData.add(new PostEach(3, 333, null, "3新增-3", "5hours ago", "from qq", null, null));
-                mData.add(new PostEach(4, 334, null, "3新增-4", "5hours ago", "", null, null));
-                mData.add(new PostEach(5, 335, null, "3新增-5", "5hours ago", "from wx", null, null));
-                mData.add(new PostEach(6, 336, null, "3新增-6", "5hours ago", "", null, null));
+                mData.add(new PostEach(1, 331, "3新增-1", "5hours ago", "", null, null));
+                mData.add(new PostEach(2, 332, "3新增-2", "5hours ago", "", null, null));
+                mData.add(new PostEach(3, 333, "3新增-3", "5hours ago", "from qq", null, null));
+                mData.add(new PostEach(4, 334, "3新增-4", "5hours ago", "", null, null));
+                mData.add(new PostEach(5, 335, "3新增-5", "5hours ago", "from wx", null, null));
+                mData.add(new PostEach(6, 336, "3新增-6", "5hours ago", "", null, null));
                 return mData;
             }
             default:
