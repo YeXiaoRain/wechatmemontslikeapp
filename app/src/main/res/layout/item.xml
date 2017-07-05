@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:background="#334455"
+        android:id="@+id/Avatar"
+        android:layout_margin="5dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="name"
+            android:id="@+id/username"
+            android:background="@color/dim_foreground_disabled_material_dark" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="comment"
+            android:id="@+id/postdetail"
+            android:background="@color/accent_material_dark" />
+
+        <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
+            android:layout_columnSpan="1"
+            android:layout_gravity="fill"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:background="#8f8f8f"
+            android:minHeight="225dp"
+            android:maxWidth="225dp"
+            android:id="@+id/singleimg" />
+
+        <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/fc_imggroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:orientation="horizontal"
+            android:rowCount="3" >
+
+            <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="#000000"
+                android:id="@+id/imgmul0" />
+            <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="#0000ff"
+                android:id="@+id/imgmul1" />
+            <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="#00ff00"
+                android:id="@+id/imgmul2" />
+            <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="#00ffff"
+                android:id="@+id/imgmul3" />
+            <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="#f0f0f0"
+                android:id="@+id/imgmul4" />
+            <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="#ff00ff"
+                android:id="@+id/imgmul5" />
+            <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="#ff00ff"
+                android:id="@+id/imgmul6" />
+            <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="#ffffff"
+                android:id="@+id/imgmul7" />
+            <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
+                android:layout_columnSpan="1"
+                android:layout_gravity="fill"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:background="#ff0000"
+                android:id="@+id/imgmul8" />
+        </GridLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/highlighted_text_material_dark">
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间"
+                />
+            <TextView
+                android:id="@+id/info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="地点 "
+                android:layout_alignParentTop="true"
+                android:layout_toEndOf="@+id/time" />
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="20dp"
+                android:background="#880000"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:id="@+id/landcview" />
+        </RelativeLayout>
+
+        <com.example.cromarmot.myapplication.View.WrapViewGroup
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:id="@+id/likesview">
+
+        </com.example.cromarmot.myapplication.View.WrapViewGroup>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:id="@+id/commentview"
+            android:background="@color/ripple_material_light">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="33333333点"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="33333333点"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="33333333点"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="33333333点"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
