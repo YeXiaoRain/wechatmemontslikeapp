@@ -11,12 +11,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.cromarmot.myapplication.Data.fc_comment;
-import com.example.cromarmot.myapplication.Data.fc_post;
+import com.example.cromarmot.myapplication.Data.CommentEach;
+import com.example.cromarmot.myapplication.Data.PostEach;
 import com.example.cromarmot.myapplication.MainActivity;
 import com.example.cromarmot.myapplication.Data.PostDataManager;
 import com.example.cromarmot.myapplication.R;
-import com.example.cromarmot.myapplication.Data.User;
+import com.example.cromarmot.myapplication.Data.UserEach;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -25,13 +25,13 @@ import java.util.Map;
 /**
  * Created by cromarmot on 17-7-5.
  */
-public class FcAdapter  extends BaseAdapter{
+public class FriendCircleAdapter extends BaseAdapter{
 
-    private LinkedList<fc_post> mPostData;
+    private LinkedList<PostEach> mPostData;
     private Context mContext;
-    private Map<Integer, User> mUsermap ;
+    private Map<Integer, UserEach> mUsermap ;
 
-    public FcAdapter(LinkedList<fc_post> md,Context mc,Map<Integer, User> mu){
+    public FriendCircleAdapter(LinkedList<PostEach> md, Context mc, Map<Integer, UserEach> mu){
         mPostData =md;
         mContext=mc;
         mUsermap=mu;
@@ -55,7 +55,7 @@ public class FcAdapter  extends BaseAdapter{
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
-            view = LayoutInflater.from(mContext).inflate(R.layout.item,viewGroup,false);
+            view = LayoutInflater.from(mContext).inflate(R.layout.posteach_item,viewGroup,false);
         }
         view.setTag(new Integer(i));
 
@@ -73,9 +73,9 @@ public class FcAdapter  extends BaseAdapter{
 
         //TODO comments
 
-        fc_post correspondingdata = mPostData.get(i);
+        PostEach correspondingdata = mPostData.get(i);
 
-        User u = mUsermap.get(new Integer(correspondingdata.getUid()));
+        UserEach u = mUsermap.get(new Integer(correspondingdata.getUid()));
 
         img_avatar.setImageBitmap(u.getUimage());
         txt_uname.setText(u.getUname());
@@ -121,9 +121,9 @@ public class FcAdapter  extends BaseAdapter{
         img_landcview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fc_post.currentPostIndex = (Integer) ((LinearLayout)v.getParent().getParent().getParent()).getTag();
+                PostEach.currentPostIndex = (Integer) ((LinearLayout)v.getParent().getParent().getParent()).getTag();
 
-                boolean isliked = PostDataManager.isLiked(MainActivity.CURRENTUSERID,fc_post.currentPostIndex);
+                boolean isliked = PostDataManager.isLiked(MainActivity.CURRENTUSERID, PostEach.currentPostIndex);
 
                 int[] location = new int[2];
                 v.getLocationOnScreen(location);
@@ -145,12 +145,12 @@ public class FcAdapter  extends BaseAdapter{
             }
         }
 
-        List<fc_comment> comments = correspondingdata.getComments();
+        List<CommentEach> comments = correspondingdata.getComments();
         int j,maxj=comments.size();
         llayout_comment.removeAllViews();
         for (j=0;j<maxj;j++){
-            fc_comment tmp_comment = comments.get(j);
-            CommentsEachView cev=new CommentsEachView(mContext);
+            CommentEach tmp_comment = comments.get(j);
+            CommentEachView cev=new CommentEachView(mContext);
             cev.init(tmp_comment.getFromid() == MainActivity.CURRENTUSERID ,i,j);
             cev.setText(PostDataManager.uid2uname(tmp_comment.getFromid())
                     +" write to "

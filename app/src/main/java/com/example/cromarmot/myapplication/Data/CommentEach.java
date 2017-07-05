@@ -3,12 +3,12 @@ package com.example.cromarmot.myapplication.Data;
 /**
  * Created by cromarmot on 17-7-5.
  */
-public class fc_comment {
+public class CommentEach {
     private int fromid;
     private int toid;
     private String data;
 
-    public fc_comment(int f,int t,String d){
+    public CommentEach(int f, int t, String d){
         fromid=f;
         toid=t;
         data=d;

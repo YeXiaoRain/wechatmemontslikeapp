@@ -15,13 +15,13 @@ import com.example.cromarmot.myapplication.R;
 /**
  * Created by cromarmot on 17-7-5.
  */
-public class ImagePopWindow extends PopupWindow {
+public class ImagePopupWindow extends PopupWindow {
 
     Context mContext;
     private LayoutInflater mInflater;
     private View mContentView;
 
-    public ImagePopWindow(Context context) {
+    public ImagePopupWindow(Context context) {
         super(context);
 
         this.mContext=context;

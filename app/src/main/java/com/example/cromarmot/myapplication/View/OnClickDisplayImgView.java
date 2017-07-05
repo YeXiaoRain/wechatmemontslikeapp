@@ -6,8 +6,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.cromarmot.myapplication.View.ImagePopWindow;
-
 /**
  * Created by cromarmot on 17-7-4.
  */
@@ -49,7 +47,7 @@ public class OnClickDisplayImgView extends ImageView implements View.OnClickList
         if(largeimg==null)
             System.out.println("OnClickDisplayImgView : NO LARGE IMAGE");//TODO try get largeimg by imgid;
         if(largeimg!=null) {
-            ImagePopWindow ipw=new ImagePopWindow(mContext);
+            ImagePopupWindow ipw=new ImagePopupWindow(mContext);
             ipw.show(largeimg);
         }
     }

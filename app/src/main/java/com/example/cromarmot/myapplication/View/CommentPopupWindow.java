@@ -37,7 +37,7 @@ public class CommentPopupWindow extends PopupWindow {
         this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        mContentView = mInflater.inflate(R.layout.bottompopupinputbox,null);
+        mContentView = mInflater.inflate(R.layout.bottom_inputbox_popup,null);
         setContentView(mContentView);
         setBackgroundDrawable(new ColorDrawable());
         setFocusable(true);

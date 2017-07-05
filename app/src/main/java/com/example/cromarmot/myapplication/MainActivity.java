@@ -19,14 +19,14 @@ public class MainActivity extends AppCompatActivity implements FcScrollerListene
 
     private int lastget = 0;
 
-    private List<fc_post> mData = null;
-    private Map<Integer,User> mUsermap = null;
+    private List<PostEach> mData = null;
+    private Map<Integer,UserEach> mUsermap = null;
 
     private Context mContext;
     private ScollerFreshableListView list_fc;
 
-    private FcAdapter mAdapter = null;
-    static public LikeCommentPopWindow lcpw;
+    private FriendCircleAdapter mAdapter = null;
+    static public LikeCommentPopupWindow lcpw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +34,23 @@ public class MainActivity extends AppCompatActivity implements FcScrollerListene
         setContentView(R.layout.activity_main);
 
         mContext = MainActivity.this;
-        DataRequest.setContext(mContext);
-        lcpw = new LikeCommentPopWindow(mContext);
+        FakeDataRequest.setContext(mContext);
+        lcpw = new LikeCommentPopupWindow(mContext);
 
         list_fc = (ScollerFreshableListView) findViewById(R.id.fc_displaylist);
 
-        mData =  new LinkedList<fc_post>();
+        mData =  new LinkedList<PostEach>();
         PostDataManager.SetPosts(mData);
 
         mUsermap = new HashMap<>();
         PostDataManager.SetUsers(mUsermap);
 
-        mAdapter = new FcAdapter((LinkedList<fc_post>) mData, mContext,mUsermap);
+        mAdapter = new FriendCircleAdapter((LinkedList<PostEach>) mData, mContext,mUsermap);
         PostDataManager.SetAdapter(mAdapter);
 
-        LinkedList<fc_post> newpostdata= DataRequest.getPostListFrom(lastget++);
+        LinkedList<PostEach> newpostdata= FakeDataRequest.getPostListFrom(lastget++);
         mData.addAll(newpostdata);
-        mUsermap.put(MainActivity.CURRENTUSERID, DataRequest.getUser(MainActivity.CURRENTUSERID));
+        mUsermap.put(MainActivity.CURRENTUSERID, FakeDataRequest.getUser(MainActivity.CURRENTUSERID));
         PostDataManager.autoUpdateUsersByNewPost(newpostdata);
 
         list_fc.setAdapter(mAdapter);
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements FcScrollerListene
             @Override
             protected Void doInBackground(Void... params) {
                 SystemClock.sleep(1000);
-                LinkedList<fc_post> newdatagroup = DataRequest.getPostListFrom(lastget++)  ;
+                LinkedList<PostEach> newdatagroup = FakeDataRequest.getPostListFrom(lastget++)  ;
                 if(newdatagroup!=null)
                     mData.addAll(newdatagroup );
                 return null;

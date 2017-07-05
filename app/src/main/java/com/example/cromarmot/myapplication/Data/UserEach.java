@@ -8,24 +8,24 @@ import java.io.File;
 /**
  * Created by cromarmot on 17-7-4.
  */
-public class User {
+public class UserEach {
     private int uid;
     private String uname;
     private String imagepath;
     private Bitmap uimage = null;
 
-    public User() {
+    public UserEach() {
 
     }
 
-    public User(int id, String n, Bitmap bm) {
+    public UserEach(int id, String n, Bitmap bm) {
         uid = id;
         uname = n;
         imagepath = "";
         uimage = bm;
     }
 
-    public User(int id, String n, String ip) {
+    public UserEach(int id, String n, String ip) {
         uid = id;
         uname = n;
         imagepath = ip;

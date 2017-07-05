@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.example.cromarmot.myapplication.Data.fc_post;
+import com.example.cromarmot.myapplication.Data.PostEach;
 import com.example.cromarmot.myapplication.MainActivity;
 import com.example.cromarmot.myapplication.Data.PostDataManager;
 import com.example.cromarmot.myapplication.R;
@@ -18,12 +18,12 @@ import com.example.cromarmot.myapplication.R;
 /**
  * Created by cromarmot on 17-7-5.
  */
-public class LikeCommentPopWindow extends PopupWindow {
+public class LikeCommentPopupWindow extends PopupWindow {
     Context mContext;
     private LayoutInflater mInflater;
     private View mContentView;
 
-    public LikeCommentPopWindow(Context context) {
+    public LikeCommentPopupWindow(Context context) {
         super(context);
         this.mContext=context;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -31,7 +31,7 @@ public class LikeCommentPopWindow extends PopupWindow {
         this.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
         this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        mContentView = mInflater.inflate(R.layout.likeandcomment,null);
+        mContentView = mInflater.inflate(R.layout.like_and_comment,null);
         setContentView(mContentView);
         setBackgroundDrawable(new ColorDrawable());
         setFocusable(true);
@@ -57,8 +57,8 @@ public class LikeCommentPopWindow extends PopupWindow {
             @Override
             public void onClick(View v) {
                 MainActivity.lcpw.dismiss();
-                if(fc_post.currentPostIndex!=-1){
-                    PostDataManager.likes(MainActivity.CURRENTUSERID,fc_post.currentPostIndex);
+                if(PostEach.currentPostIndex!=-1){
+                    PostDataManager.likes(MainActivity.CURRENTUSERID, PostEach.currentPostIndex);
                 }
             }
         });
@@ -67,8 +67,8 @@ public class LikeCommentPopWindow extends PopupWindow {
             @Override
             public void onClick(View v) {
                 MainActivity.lcpw.dismiss();
-                if(fc_post.currentPostIndex!=-1){
-                    PostDataManager.unlike(MainActivity.CURRENTUSERID,fc_post.currentPostIndex);
+                if(PostEach.currentPostIndex!=-1){
+                    PostDataManager.unlike(MainActivity.CURRENTUSERID, PostEach.currentPostIndex);
                 }
             }
         });
@@ -77,9 +77,9 @@ public class LikeCommentPopWindow extends PopupWindow {
             @Override
             public void onClick(View v) {
                 MainActivity.lcpw.dismiss();
-                if(fc_post.currentPostIndex!=-1){
+                if(PostEach.currentPostIndex!=-1){
                     CommentPopupWindow cpw=new CommentPopupWindow(mContext);
-                    cpw.show(fc_post.currentPostIndex, PostDataManager.getPostByIndex(fc_post.currentPostIndex).getUid());
+                    cpw.show(PostEach.currentPostIndex, PostDataManager.getPostByIndex(PostEach.currentPostIndex).getUid());
                 }
             }
         });

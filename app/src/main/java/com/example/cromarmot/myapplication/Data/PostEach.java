@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by cromarmot on 17-7-5.
  */
-public class fc_post {
+public class PostEach {
     private int uid;
     private int upostid;
     private Bitmap [] images ;
@@ -16,11 +16,11 @@ public class fc_post {
     private String date;
     private String special;
     private List<Integer> likes;
-    private List<fc_comment> comments;
+    private List<CommentEach> comments;
 
     static public Integer currentPostIndex = -1;
 
-    public fc_post(int id,int upid, Bitmap [] ims,String da,String de,String sp, List<Integer> l,List<fc_comment> c){
+    public PostEach(int id, int upid, Bitmap [] ims, String da, String de, String sp, List<Integer> l, List<CommentEach> c){
         uid=id;
         upostid = upid;
         images = ims;
@@ -28,7 +28,7 @@ public class fc_post {
         date = de;
         special = sp;
         likes = l==null ?  new ArrayList<Integer>():l;
-        comments = c==null ? new ArrayList<fc_comment>():c;
+        comments = c==null ? new ArrayList<CommentEach>():c;
     }
 
     public int getUid() {
@@ -83,11 +83,11 @@ public class fc_post {
         return likes;
     }
 
-    public List< fc_comment> getComments() {
+    public List<CommentEach> getComments() {
         return comments;
     }
 
-    public void setComments(List< fc_comment> comments) {
+    public void setComments(List<CommentEach> comments) {
         this.comments = comments;
     }
 }

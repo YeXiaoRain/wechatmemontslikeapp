@@ -10,28 +10,28 @@ import com.example.cromarmot.myapplication.Data.PostDataManager;
 /**
  * Created by cromarmot on 17-7-6.
  */
-public class CommentsEachView extends TextView  implements View.OnClickListener,View.OnLongClickListener{
+public class CommentEachView extends TextView  implements View.OnClickListener,View.OnLongClickListener{
     private boolean isCurrentUserPost;
     private int postIndex;
     private int commentsIndex;
     private Context mContext;
 
-    public CommentsEachView(Context context) {
+    public CommentEachView(Context context) {
         super(context);
         mContext=context;
     }
 
-    public CommentsEachView(Context context, AttributeSet attrs) {
+    public CommentEachView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext=context;
     }
 
-    public CommentsEachView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CommentEachView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext=context;
     }
 
-    public CommentsEachView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CommentEachView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         mContext=context;
     }

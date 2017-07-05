@@ -35,7 +35,7 @@ public class DeletePopupWindow extends PopupWindow {
         this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         this.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        mContentView = mInflater.inflate(R.layout.delete_popup_window,null);
+        mContentView = mInflater.inflate(R.layout.delete_popup,null);
         setContentView(mContentView);
         setBackgroundDrawable(new ColorDrawable());
         setFocusable(true);
