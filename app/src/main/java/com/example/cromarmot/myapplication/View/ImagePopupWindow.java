@@ -17,14 +17,12 @@ import com.example.cromarmot.myapplication.R;
  */
 public class ImagePopupWindow extends PopupWindow {
 
-    Context mContext;
     private LayoutInflater mInflater;
     private View mContentView;
 
     public ImagePopupWindow(Context context) {
         super(context);
 
-        this.mContext=context;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         //this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
@@ -47,9 +45,6 @@ public class ImagePopupWindow extends PopupWindow {
                 return false;
             }
         });
-    }
-    public void show(){
-        this.showAtLocation(mContentView, Gravity.CENTER, 0, 0);
     }
     public void show(Bitmap bm){
         this.showAtLocation(mContentView, Gravity.CENTER, 0, 0);

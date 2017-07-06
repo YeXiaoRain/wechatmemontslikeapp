@@ -18,7 +18,6 @@ import com.example.cromarmot.myapplication.R;
  * Created by cromarmot on 17-7-5.
  */
 public class LikeCommentPopupWindow extends PopupWindow {
-    Context mContext;
     private LayoutInflater mInflater;
     private View mContentView;
     private PopupWindow self;
@@ -26,7 +25,6 @@ public class LikeCommentPopupWindow extends PopupWindow {
 
     public LikeCommentPopupWindow(Context context,CommentPopupWindow commentPopupWindow) {
         super(context);
-        this.mContext=context;
         this.self=this;
         cpw=commentPopupWindow;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -86,10 +84,6 @@ public class LikeCommentPopupWindow extends PopupWindow {
             }
         });
 
-    }
-
-    public void show(){
-        this.showAtLocation(mContentView, Gravity.CENTER, 0, 0);
     }
 
     public void show(int []location,boolean likeState){

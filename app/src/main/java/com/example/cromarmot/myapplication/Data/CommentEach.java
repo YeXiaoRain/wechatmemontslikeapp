@@ -18,23 +18,12 @@ public class CommentEach {
         return fromid;
     }
 
-    public void setFromid(int fromid) {
-        this.fromid = fromid;
-    }
-
     public int getToid() {
         return toid;
-    }
-
-    public void setToid(int toid) {
-        this.toid = toid;
     }
 
     public String getData() {
         return data;
     }
 
-    public void setData(String data) {
-        this.data = data;
-    }
 }

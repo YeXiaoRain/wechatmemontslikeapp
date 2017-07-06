@@ -12,30 +12,20 @@ import android.widget.ImageView;
 public class OnClickDisplayImgView extends ImageView implements View.OnClickListener {
     private int imgid = -1;
     private Bitmap largeimg = null;
-    private Context mContext;
     ImagePopupWindow ipw;
 
     public OnClickDisplayImgView(Context context) {
         super(context);
-        mContext=context;
         init();
     }
 
     public OnClickDisplayImgView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext=context;
         init();
     }
 
     public OnClickDisplayImgView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mContext=context;
-        init();
-    }
-
-    public OnClickDisplayImgView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        mContext=context;
         init();
     }
 
@@ -52,7 +42,6 @@ public class OnClickDisplayImgView extends ImageView implements View.OnClickList
         if(largeimg==null)
             System.out.println("OnClickDisplayImgView : NO LARGE IMAGE");//TODO try get largeimg by imgid;
         if(largeimg!=null) {
-            System.out.println(this);
             ipw.show(largeimg);
         }
     }

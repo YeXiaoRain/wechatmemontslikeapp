@@ -93,6 +93,9 @@ public class FriendCircleAdapter extends BaseAdapter{
         WrapViewGroup wrapview_likes = (WrapViewGroup) view.findViewById(R.id.likes_usergroup);
         ImageView img_landcview = (ImageView) view.findViewById(R.id.like_and_comment_button);
         LinearLayout llayout_comment = (LinearLayout) view.findViewById(R.id.comments_view);
+        RelativeLayout rl = (RelativeLayout)view.findViewById(R.id.sharebox);
+        TextView tv_shareurl = (TextView)view.findViewById(R.id.sharebox_url);
+
 
         PostEach correspondingdata = mPostData.get(i);
 
@@ -187,13 +190,10 @@ public class FriendCircleAdapter extends BaseAdapter{
             cev.setText(PostDataManager.uid2uname(tmp_comment.getFromid())
                     +" write to "
                     +PostDataManager.uid2uname(tmp_comment.getToid())
-                    +":"
+                    +" : "
                     +tmp_comment.getData());
             llayout_comment.addView(cev);
         }
-
-        RelativeLayout rl = (RelativeLayout)view.findViewById(R.id.sharebox);
-        TextView tv_shareurl = (TextView)view.findViewById(R.id.sharebox_url);
 
         String shareurl = correspondingdata.getShareUrl();
         if(shareurl != null && !shareurl.equals("")){

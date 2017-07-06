@@ -12,9 +12,9 @@ import java.util.Random;
  */
 public class PostDataManager {
     public static final int CURRENTUSERID = 0; // should in another struct which record current user=.=
-    static List<PostEach> mPostData = null;
-    static Map<Integer,UserEach> mUsermap = null;
-    static FriendCircleAdapter mAdapter = null;
+    static List<PostEach> mPostData;
+    static Map<Integer,UserEach> mUsermap;
+    static FriendCircleAdapter mAdapter;
     static public void SetUsers(Map<Integer,UserEach> mum){
         mUsermap = mum;
     }
@@ -121,11 +121,8 @@ public class PostDataManager {
     }
 
     public static void shareWebSite(String url){
-        System.out.println("sssssssfff:"+url);
         assert (url!=null && !url.equals(""));
-        System.out.println(mPostData.size());
         mPostData.add(0,new PostEach(CURRENTUSERID, new Random().nextInt(),url,"","1 min ago",url,null,null));
-        System.out.println(mPostData.size());
         mAdapter.notifyDataSetChanged();
     }
 }

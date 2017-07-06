@@ -19,7 +19,6 @@ import com.example.cromarmot.myapplication.R;
  * Created by cromarmot on 17-7-6.
  */
 public class DeletePopupWindow extends PopupWindow {
-    Context mContext;
     private LayoutInflater mInflater;
     private View mContentView;
     private PopupWindow myself;
@@ -28,7 +27,6 @@ public class DeletePopupWindow extends PopupWindow {
 
     public DeletePopupWindow(Context context) {
         super(context);
-        this.mContext=context;
         this.myself = this;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 

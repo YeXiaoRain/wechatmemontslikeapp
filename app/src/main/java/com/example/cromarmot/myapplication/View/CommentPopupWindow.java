@@ -20,7 +20,6 @@ import com.example.cromarmot.myapplication.R;
  */
 
 public class CommentPopupWindow extends PopupWindow {
-    private Context mContext;
     private LayoutInflater mInflater;
     private View mContentView;
     private int touserid;
@@ -30,7 +29,6 @@ public class CommentPopupWindow extends PopupWindow {
     public CommentPopupWindow(Context context) {
         super(context);
 
-        this.mContext=context;
         this.self = this;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 

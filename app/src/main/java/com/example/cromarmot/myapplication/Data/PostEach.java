@@ -21,14 +21,17 @@ public class PostEach {
 
     static public Integer currentPostIndex = -1;
 
+    // photos
     public PostEach(int id, int upid, Bitmap [] ims, String da, String de, String sp, List<Integer> l, List<CommentEach> c){
         this(id,upid,ims,da,de,sp,l,c,"");
     }
 
+    // share
     public PostEach(int id, int upid, String shareurl, String da, String de, String sp, List<Integer> l, List<CommentEach> c){
         this(id,upid,null,da,de,sp,l,c,shareurl);
     }
 
+    // text only
     public PostEach(int id, int upid, String da, String de, String sp, List<Integer> l, List<CommentEach> c){
         this(id,upid,null,da,de,sp,l,c,"");
     }

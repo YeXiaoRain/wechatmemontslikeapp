@@ -14,10 +14,6 @@ public class UserEach {
     private String imagepath;
     private Bitmap uimage = null;
 
-    public UserEach() {
-
-    }
-
     public UserEach(int id, String n, Bitmap bm) {
         uid = id;
         uname = n;
