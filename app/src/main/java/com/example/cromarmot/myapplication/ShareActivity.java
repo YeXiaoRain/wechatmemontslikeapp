@@ -20,7 +20,7 @@ public class ShareActivity extends AppCompatActivity {
         Bundle bundle = this.getIntent().getExtras();
         this.shareUrl = bundle.getString("ShareUrl");
 
-        TextView tv= (TextView) findViewById(R.id.displayshareurl);
+        TextView tv= (TextView) findViewById(R.id.sharepage_display_shareurl);
         tv.setText(shareUrl);
     }
 

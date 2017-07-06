@@ -6,11 +6,18 @@ import android.os.AsyncTask;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.cromarmot.myapplication.Adapter.FriendCircleAdapter;
-import com.example.cromarmot.myapplication.Data.*;
-import com.example.cromarmot.myapplication.View.*;
+import com.example.cromarmot.myapplication.Data.FakeDataRequest;
+import com.example.cromarmot.myapplication.Data.PostDataManager;
+import com.example.cromarmot.myapplication.Data.PostEach;
+import com.example.cromarmot.myapplication.Data.UserEach;
+import com.example.cromarmot.myapplication.View.CommentPopupWindow;
+import com.example.cromarmot.myapplication.View.DeletePopupWindow;
+import com.example.cromarmot.myapplication.View.FcScrollerListener;
+import com.example.cromarmot.myapplication.View.ImagePopupWindow;
+import com.example.cromarmot.myapplication.View.LikeCommentPopupWindow;
+import com.example.cromarmot.myapplication.View.ScollerFreshableListView;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -18,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 
 public class FriendCircleActivity extends AppCompatActivity implements FcScrollerListener {
-    public static final int CURRENTUSERID = 0;
 
     private int lastget = 0;
 
@@ -29,7 +35,11 @@ public class FriendCircleActivity extends AppCompatActivity implements FcScrolle
     private ScollerFreshableListView list_fc;
 
     private FriendCircleAdapter mAdapter = null;
-    static public LikeCommentPopupWindow lcpw;
+    private LikeCommentPopupWindow lcpw;
+
+    private ImagePopupWindow ipw;
+    private CommentPopupWindow cpw;
+    private DeletePopupWindow dpw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +47,14 @@ public class FriendCircleActivity extends AppCompatActivity implements FcScrolle
         setContentView(R.layout.activity_main);
 
         mContext = FriendCircleActivity.this;
-        FakeDataRequest.setContext(mContext);
-        lcpw = new LikeCommentPopupWindow(mContext);
 
-        list_fc = (ScollerFreshableListView) findViewById(R.id.fc_displaylist);
+        FakeDataRequest.setContext(mContext);
+        ipw = new ImagePopupWindow(mContext);
+        cpw = new CommentPopupWindow(mContext);
+        dpw = new DeletePopupWindow(mContext);
+        lcpw = new LikeCommentPopupWindow(mContext,cpw);
+
+        list_fc = (ScollerFreshableListView) findViewById(R.id.friendcircle_displaylist);
 
         mData =  new LinkedList<PostEach>();
         PostDataManager.SetPosts(mData);
@@ -48,12 +62,12 @@ public class FriendCircleActivity extends AppCompatActivity implements FcScrolle
         mUsermap = new HashMap<>();
         PostDataManager.SetUsers(mUsermap);
 
-        mAdapter = new FriendCircleAdapter((LinkedList<PostEach>) mData, mContext,mUsermap);
+        mAdapter = new FriendCircleAdapter((LinkedList<PostEach>) mData, mContext,mUsermap,ipw,lcpw,cpw,dpw);
         PostDataManager.SetAdapter(mAdapter);
 
         LinkedList<PostEach> newpostdata= FakeDataRequest.getPostListFrom(lastget++);
         mData.addAll(newpostdata);
-        mUsermap.put(FriendCircleActivity.CURRENTUSERID, FakeDataRequest.getUser(FriendCircleActivity.CURRENTUSERID));
+        mUsermap.put(PostDataManager.CURRENTUSERID, FakeDataRequest.getUser(PostDataManager.CURRENTUSERID));
         PostDataManager.autoUpdateUsersByNewPost(newpostdata);
 
         list_fc.setAdapter(mAdapter);
@@ -68,7 +82,7 @@ public class FriendCircleActivity extends AppCompatActivity implements FcScrolle
                 SystemClock.sleep(1000);
                 LinkedList<PostEach> newdatagroup = FakeDataRequest.getPostListFrom(lastget++)  ;
                 if(newdatagroup!=null)
-                    mData.addAll(newdatagroup );
+                    mData.addAll(newdatagroup);
                 return null;
             }
 

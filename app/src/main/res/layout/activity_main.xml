@@ -10,7 +10,7 @@
     tools:context=".FriendCircleActivity">
 
     <com.example.cromarmot.myapplication.View.ScollerFreshableListView
-        android:id="@+id/fc_displaylist"
+        android:id="@+id/friendcircle_displaylist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </com.example.cromarmot.myapplication.View.ScollerFreshableListView>

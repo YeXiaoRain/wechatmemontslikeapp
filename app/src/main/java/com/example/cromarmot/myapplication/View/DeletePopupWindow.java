@@ -54,7 +54,7 @@ public class DeletePopupWindow extends PopupWindow {
             }
         });
 
-        Button bt = (Button)mContentView.findViewById(R.id.deletebutton);
+        Button bt = (Button)mContentView.findViewById(R.id.delete_comment_button);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +67,7 @@ public class DeletePopupWindow extends PopupWindow {
     public void show(int [] location,int pindex,int cindex){
         postindex=pindex;
         commentsindex=cindex;
-        TextView tv= (TextView) mContentView.findViewById(R.id.commentinputbox);
+        TextView tv= (TextView) mContentView.findViewById(R.id.comment_inputbox);
         this.showAtLocation(mContentView,Gravity.LEFT|Gravity.TOP,location[0],location[1]);
     }
 }

@@ -13,6 +13,7 @@ public class OnClickDisplayImgView extends ImageView implements View.OnClickList
     private int imgid = -1;
     private Bitmap largeimg = null;
     private Context mContext;
+    ImagePopupWindow ipw;
 
     public OnClickDisplayImgView(Context context) {
         super(context);
@@ -42,12 +43,16 @@ public class OnClickDisplayImgView extends ImageView implements View.OnClickList
         setOnClickListener(this);
     }
 
+    public void setIPW(ImagePopupWindow ipw){
+        this.ipw = ipw;
+    }
+
     @Override
     public void onClick(View v) {
         if(largeimg==null)
             System.out.println("OnClickDisplayImgView : NO LARGE IMAGE");//TODO try get largeimg by imgid;
         if(largeimg!=null) {
-            ImagePopupWindow ipw=new ImagePopupWindow(mContext);
+            System.out.println(this);
             ipw.show(largeimg);
         }
     }

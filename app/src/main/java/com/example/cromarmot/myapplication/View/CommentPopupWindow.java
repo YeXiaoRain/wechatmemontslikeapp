@@ -57,12 +57,13 @@ public class CommentPopupWindow extends PopupWindow {
             }
         });
 
-        Button bt=(Button)mContentView.findViewById(R.id.addcomment);
+        Button bt=(Button)mContentView.findViewById(R.id.add_comment_button);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView tv= (TextView) mContentView.findViewById(R.id.commentinputbox);
+                TextView tv= (TextView) mContentView.findViewById(R.id.comment_inputbox);
                 PostDataManager.addComments(postindex,touserid,tv.getText().toString());
+                tv.setText("");
                 self.dismiss();
             }
         });
@@ -70,7 +71,7 @@ public class CommentPopupWindow extends PopupWindow {
     public void show(int pi,int tui){
         postindex=pi;
         touserid=tui;
-        TextView tv= (TextView) mContentView.findViewById(R.id.commentinputbox);
+        TextView tv= (TextView) mContentView.findViewById(R.id.comment_inputbox);
         this.showAtLocation(mContentView , Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 }

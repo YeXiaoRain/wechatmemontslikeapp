@@ -53,7 +53,7 @@ public class ImagePopupWindow extends PopupWindow {
     }
     public void show(Bitmap bm){
         this.showAtLocation(mContentView, Gravity.CENTER, 0, 0);
-        ImageView imageView = (ImageView) mContentView.findViewById(R.id.imageView);
+        ImageView imageView = (ImageView) mContentView.findViewById(R.id.single_image_view);
         imageView.setImageBitmap(bm);
         this.update(800,800);//screen width height
     }

@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Text"
-        android:id="@+id/displayshareurl"
+        android:id="@+id/sharepage_display_shareurl"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
 </RelativeLayout>

@@ -7,8 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:textSize="18sp"
-        android:text="底部"
+        android:text="- - -bottom- - -"
         android:gravity="center"
-        android:background="#43BBEB"
-        android:textColor="#FFFFFF"/>
+        android:background="#AAAAAA"
+        android:textColor="#000000"/>
 </LinearLayout>

@@ -11,7 +11,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.cromarmot.myapplication.Data.PostEach;
-import com.example.cromarmot.myapplication.FriendCircleActivity;
 import com.example.cromarmot.myapplication.Data.PostDataManager;
 import com.example.cromarmot.myapplication.R;
 
@@ -22,10 +21,14 @@ public class LikeCommentPopupWindow extends PopupWindow {
     Context mContext;
     private LayoutInflater mInflater;
     private View mContentView;
+    private PopupWindow self;
+    private CommentPopupWindow cpw;
 
-    public LikeCommentPopupWindow(Context context) {
+    public LikeCommentPopupWindow(Context context,CommentPopupWindow commentPopupWindow) {
         super(context);
         this.mContext=context;
+        this.self=this;
+        cpw=commentPopupWindow;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         this.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -49,16 +52,16 @@ public class LikeCommentPopupWindow extends PopupWindow {
         });
 
 
-        TextView txt_like = (TextView) mContentView.findViewById(R.id.lac_like);
-        TextView txt_unlike = (TextView) mContentView.findViewById(R.id.lac_unlike);
-        TextView txt_comment = (TextView) mContentView.findViewById(R.id.lac_comment);
+        TextView txt_like = (TextView) mContentView.findViewById(R.id.like_button);
+        TextView txt_unlike = (TextView) mContentView.findViewById(R.id.unlike_button);
+        TextView txt_comment = (TextView) mContentView.findViewById(R.id.comment_button);
 
         txt_like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FriendCircleActivity.lcpw.dismiss();
+                self.dismiss();
                 if(PostEach.currentPostIndex!=-1){
-                    PostDataManager.likes(FriendCircleActivity.CURRENTUSERID, PostEach.currentPostIndex);
+                    PostDataManager.likes(PostDataManager.CURRENTUSERID, PostEach.currentPostIndex);
                 }
             }
         });
@@ -66,9 +69,9 @@ public class LikeCommentPopupWindow extends PopupWindow {
         txt_unlike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FriendCircleActivity.lcpw.dismiss();
+                self.dismiss();
                 if(PostEach.currentPostIndex!=-1){
-                    PostDataManager.unlike(FriendCircleActivity.CURRENTUSERID, PostEach.currentPostIndex);
+                    PostDataManager.unlike(PostDataManager.CURRENTUSERID, PostEach.currentPostIndex);
                 }
             }
         });
@@ -76,9 +79,8 @@ public class LikeCommentPopupWindow extends PopupWindow {
         txt_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FriendCircleActivity.lcpw.dismiss();
+                self.dismiss();
                 if(PostEach.currentPostIndex!=-1){
-                    CommentPopupWindow cpw=new CommentPopupWindow(mContext);
                     cpw.show(PostEach.currentPostIndex, PostDataManager.getPostByIndex(PostEach.currentPostIndex).getUid());
                 }
             }
@@ -91,8 +93,8 @@ public class LikeCommentPopupWindow extends PopupWindow {
     }
 
     public void show(int []location,boolean likeState){
-        TextView tv_like=(TextView) mContentView.findViewById(R.id.lac_like);
-        TextView tv_unlike=(TextView) mContentView.findViewById(R.id.lac_unlike);
+        TextView tv_like=(TextView) mContentView.findViewById(R.id.like_button);
+        TextView tv_unlike=(TextView) mContentView.findViewById(R.id.unlike_button);
         if(likeState){
             tv_like.setVisibility(View.GONE);
             tv_unlike.setVisibility(View.VISIBLE);

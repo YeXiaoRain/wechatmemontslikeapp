@@ -17,19 +17,21 @@ import android.widget.TextView;
 
 import com.example.cromarmot.myapplication.Data.CommentEach;
 import com.example.cromarmot.myapplication.Data.PostEach;
-import com.example.cromarmot.myapplication.FriendCircleActivity;
 import com.example.cromarmot.myapplication.Data.PostDataManager;
 import com.example.cromarmot.myapplication.R;
 import com.example.cromarmot.myapplication.Data.UserEach;
 import com.example.cromarmot.myapplication.ShareActivity;
 import com.example.cromarmot.myapplication.View.CommentEachView;
+import com.example.cromarmot.myapplication.View.CommentPopupWindow;
+import com.example.cromarmot.myapplication.View.DeletePopupWindow;
+import com.example.cromarmot.myapplication.View.ImagePopupWindow;
+import com.example.cromarmot.myapplication.View.LikeCommentPopupWindow;
 import com.example.cromarmot.myapplication.View.OnClickDisplayImgView;
 import com.example.cromarmot.myapplication.View.WrapViewGroup;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 /**
  * Created by cromarmot on 17-7-5.
@@ -39,11 +41,23 @@ public class FriendCircleAdapter extends BaseAdapter{
     private LinkedList<PostEach> mPostData;
     private Context mContext;
     private Map<Integer, UserEach> mUsermap ;
+    private ImagePopupWindow ipw;
+    private LikeCommentPopupWindow lcpw;
+    private CommentPopupWindow cpw;
+    private DeletePopupWindow dpw;
 
-    public FriendCircleAdapter(LinkedList<PostEach> md, Context mc, Map<Integer, UserEach> mu){
-        mPostData =md;
-        mContext=mc;
-        mUsermap=mu;
+    public FriendCircleAdapter(LinkedList<PostEach> md, Context mc, Map<Integer, UserEach> mu,
+                               ImagePopupWindow imgpw,
+                               LikeCommentPopupWindow likeCommentPopupWindow,
+                               CommentPopupWindow commentPopupWindow,
+                               DeletePopupWindow deletePopupWindow){
+        mPostData = md;
+        mContext = mc;
+        mUsermap = mu;
+        ipw = imgpw;
+        lcpw = likeCommentPopupWindow;
+        cpw = commentPopupWindow;
+        dpw = deletePopupWindow;
     }
 
     @Override
@@ -68,19 +82,17 @@ public class FriendCircleAdapter extends BaseAdapter{
         }
         view.setTag(new Integer(i));
 
-        ImageView img_avatar = (ImageView) view.findViewById(R.id.Avatar);
+        ImageView img_avatar = (ImageView) view.findViewById(R.id.avatar);
         TextView txt_uname = (TextView) view.findViewById(R.id.username);
         TextView txt_pdetail = (TextView) view.findViewById(R.id.postdetail);
         TextView txt_ptime = (TextView) view.findViewById(R.id.time);
         TextView txt_pinfo = (TextView) view.findViewById(R.id.info);
 
         OnClickDisplayImgView img_pimage = (OnClickDisplayImgView) view.findViewById(R.id.singleimg);
-        GridLayout layout_imggroup = (GridLayout) view.findViewById(R.id.fc_imggroup);
-        WrapViewGroup wrapview_likes = (WrapViewGroup) view.findViewById(R.id.likesview);
-        ImageView img_landcview = (ImageView) view.findViewById(R.id.landcview);
-        LinearLayout llayout_comment = (LinearLayout) view.findViewById(R.id.commentview);
-
-        //TODO comments
+        GridLayout layout_imggroup = (GridLayout) view.findViewById(R.id.post_imagegroup);
+        WrapViewGroup wrapview_likes = (WrapViewGroup) view.findViewById(R.id.likes_usergroup);
+        ImageView img_landcview = (ImageView) view.findViewById(R.id.like_and_comment_button);
+        LinearLayout llayout_comment = (LinearLayout) view.findViewById(R.id.comments_view);
 
         PostEach correspondingdata = mPostData.get(i);
 
@@ -109,6 +121,7 @@ public class FriendCircleAdapter extends BaseAdapter{
             layout_imggroup.setVisibility(View.GONE);
             img_pimage.setImageBitmap(imgs[0]);
             img_pimage.setLargeimg(imgs[0]);
+            img_pimage.setIPW(ipw);
         }else{
             img_pimage.setVisibility(View.GONE);
             layout_imggroup.setVisibility(View.VISIBLE);
@@ -124,6 +137,9 @@ public class FriendCircleAdapter extends BaseAdapter{
                     (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul8),
             };
             int j,maxj=imgs.length;
+            for(j=0;j<9;j++){
+                imgviews[j].setIPW(ipw);
+            }
             for(j=0;j<maxj;j++){
                 imgviews[j].setVisibility(View.VISIBLE);
                 imgviews[j].setImageBitmap(imgs[j]);
@@ -139,11 +155,11 @@ public class FriendCircleAdapter extends BaseAdapter{
             public void onClick(View v) {
                 PostEach.currentPostIndex = (Integer) ((LinearLayout)v.getParent().getParent().getParent()).getTag();
 
-                boolean isliked = PostDataManager.isLiked(FriendCircleActivity.CURRENTUSERID, PostEach.currentPostIndex);
+                boolean isliked = PostDataManager.isLiked(PostDataManager.CURRENTUSERID, PostEach.currentPostIndex);
 
                 int[] location = new int[2];
                 v.getLocationOnScreen(location);
-                FriendCircleActivity.lcpw.show(location,isliked);
+                lcpw.show(location,isliked);
             }
         });
 
@@ -167,7 +183,7 @@ public class FriendCircleAdapter extends BaseAdapter{
         for (j=0;j<maxj;j++){
             CommentEach tmp_comment = comments.get(j);
             CommentEachView cev=new CommentEachView(mContext);
-            cev.init(tmp_comment.getFromid() == FriendCircleActivity.CURRENTUSERID ,i,j);
+            cev.init(tmp_comment.getFromid() == PostDataManager.CURRENTUSERID ,i,j,cpw,dpw);
             cev.setText(PostDataManager.uid2uname(tmp_comment.getFromid())
                     +" write to "
                     +PostDataManager.uid2uname(tmp_comment.getToid())
@@ -177,7 +193,7 @@ public class FriendCircleAdapter extends BaseAdapter{
         }
 
         RelativeLayout rl = (RelativeLayout)view.findViewById(R.id.sharebox);
-        TextView tv_shareurl = (TextView)view.findViewById(R.id.posteachurl);
+        TextView tv_shareurl = (TextView)view.findViewById(R.id.sharebox_url);
 
         String shareurl = correspondingdata.getShareUrl();
         if(shareurl != null && !shareurl.equals("")){
@@ -186,7 +202,7 @@ public class FriendCircleAdapter extends BaseAdapter{
             rl.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String su = ((TextView)v.findViewById(R.id.posteachurl)).getText().toString();
+                    String su = ((TextView)v.findViewById(R.id.sharebox_url)).getText().toString();
                     Intent intent =new Intent(mContext,ShareActivity.class);
                     Bundle bundle=new Bundle();
                     bundle.putString("ShareUrl", su);

@@ -8,7 +8,7 @@
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:background="#334455"
-        android:id="@+id/Avatar"
+        android:id="@+id/avatar"
         android:layout_margin="5dp" />
 
     <LinearLayout
@@ -40,14 +40,14 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="#000000"
-                android:id="@+id/imageView2" />
+                android:id="@+id/sharebox_img" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/posteachurl"
+                android:id="@+id/sharebox_url"
                 android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/imageView2"
+                android:layout_toEndOf="@+id/sharebox_img"
                 android:text="https://example.org" />
         </RelativeLayout>
 
@@ -63,7 +63,7 @@
 
         <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/fc_imggroup"
+            android:id="@+id/post_imagegroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:columnCount="3"
@@ -158,7 +158,7 @@
                 android:background="#880000"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/landcview" />
+                android:id="@+id/like_and_comment_button" />
         </RelativeLayout>
 
         <com.example.cromarmot.myapplication.View.WrapViewGroup
@@ -166,7 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:id="@+id/likesview">
+            android:id="@+id/likes_usergroup">
 
         </com.example.cromarmot.myapplication.View.WrapViewGroup>
 
@@ -175,7 +175,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:id="@+id/commentview"
+            android:id="@+id/comments_view"
             android:background="@color/ripple_material_light">
 
             <TextView

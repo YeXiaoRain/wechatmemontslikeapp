@@ -1,6 +1,5 @@
 package com.example.cromarmot.myapplication.Data;
 
-import com.example.cromarmot.myapplication.FriendCircleActivity;
 import com.example.cromarmot.myapplication.Adapter.FriendCircleAdapter;
 
 import java.util.LinkedList;
@@ -12,6 +11,7 @@ import java.util.Random;
  * Created by cromarmot on 17-7-3.
  */
 public class PostDataManager {
+    public static final int CURRENTUSERID = 0; // should in another struct which record current user=.=
     static List<PostEach> mPostData = null;
     static Map<Integer,UserEach> mUsermap = null;
     static FriendCircleAdapter mAdapter = null;
@@ -64,7 +64,7 @@ public class PostDataManager {
     static public void addComments(int postindex,int touserid,String data){
         PostEach post = getPostByIndex(postindex);
         List<CommentEach> comments =  post.getComments();
-        comments.add(new CommentEach(FriendCircleActivity.CURRENTUSERID,touserid,data));
+        comments.add(new CommentEach(CURRENTUSERID,touserid,data));
         mAdapter.notifyDataSetChanged();
     }
 
@@ -124,7 +124,7 @@ public class PostDataManager {
         System.out.println("sssssssfff:"+url);
         assert (url!=null && !url.equals(""));
         System.out.println(mPostData.size());
-        mPostData.add(0,new PostEach(FriendCircleActivity.CURRENTUSERID, new Random().nextInt(),url,"","1 min ago",url,null,null));
+        mPostData.add(0,new PostEach(CURRENTUSERID, new Random().nextInt(),url,"","1 min ago",url,null,null));
         System.out.println(mPostData.size());
         mAdapter.notifyDataSetChanged();
     }
