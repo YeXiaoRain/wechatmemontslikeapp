@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingTop="3dp"
+    android:paddingRight="10dp">
+
+
 
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
-        android:background="#334455"
+        android:background="@drawable/default_hd_avatar"
         android:id="@+id/avatar"
         android:layout_margin="5dp" />
 
@@ -21,26 +27,33 @@
             android:layout_height="wrap_content"
             android:text="name"
             android:id="@+id/username"
-            android:background="@color/dim_foreground_disabled_material_dark" />
+            android:textColor="#575f6a"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="comment"
             android:id="@+id/postdetail"
-            android:background="@color/accent_material_dark" />
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:textColor="#000000" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/sharebox"
-            android:background="@android:color/holo_orange_light">
+            android:background="#efefef"
+            android:padding="3dp">
 
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="#000000"
-                android:id="@+id/sharebox_img" />
+                android:background="@drawable/default_img"
+                android:id="@+id/sharebox_img"
+                android:adjustViewBounds="true" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -48,18 +61,23 @@
                 android:id="@+id/sharebox_url"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/sharebox_img"
-                android:text="https://example.org" />
+                android:text="https://example.org"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp" />
         </RelativeLayout>
 
         <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
             android:layout_columnSpan="1"
             android:layout_gravity="fill"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:background="#8f8f8f"
-            android:minHeight="225dp"
-            android:maxWidth="225dp"
-            android:id="@+id/singleimg" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="205dp"
+            android:id="@+id/singleimg"
+            android:contextClickable="false"
+            android:nestedScrollingEnabled="false"
+            android:adjustViewBounds="true"
+            android:maxHeight="205dp"
+            android:scaleType="fitStart" />
 
         <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -73,92 +91,124 @@
             <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:background="#000000"
-                android:id="@+id/imgmul0" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/default_img"
+                android:id="@+id/imgmul0"
+                android:scaleType="centerCrop"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp" />
             <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:background="#0000ff"
-                android:id="@+id/imgmul1" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/default_img"
+                android:id="@+id/imgmul1"
+                android:layout_marginRight="5dp"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="5dp" />
             <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:background="#00ff00"
-                android:id="@+id/imgmul2" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/default_img"
+                android:id="@+id/imgmul2"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:scaleType="centerCrop" />
             <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:background="#00ffff"
-                android:id="@+id/imgmul3" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/default_img"
+                android:id="@+id/imgmul3"
+                android:scaleType="centerCrop"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp" />
             <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:background="#f0f0f0"
-                android:id="@+id/imgmul4" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/default_img"
+                android:id="@+id/imgmul4"
+                android:scaleType="centerCrop"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp" />
             <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:background="#ff00ff"
-                android:id="@+id/imgmul5" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/default_img"
+                android:id="@+id/imgmul5"
+                android:scaleType="centerCrop"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp" />
             <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:background="#ff00ff"
-                android:id="@+id/imgmul6" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/default_img"
+                android:id="@+id/imgmul6"
+                android:scaleType="centerCrop"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp" />
             <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:background="#ffffff"
-                android:id="@+id/imgmul7" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/default_img"
+                android:id="@+id/imgmul7"
+                android:scaleType="centerCrop"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp" />
             <com.example.cromarmot.myapplication.View.OnClickDisplayImgView
                 android:layout_columnSpan="1"
                 android:layout_gravity="fill"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
-                android:background="#ff0000"
-                android:id="@+id/imgmul8" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/default_img"
+                android:id="@+id/imgmul8"
+                android:scaleType="centerCrop"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp" />
         </GridLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/highlighted_text_material_dark">
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp">
             <TextView
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="时间"
-                />
+                android:layout_marginRight="5dp"
+                android:textSize="@dimen/abc_action_bar_overflow_padding_end_material"
+                android:textColor="@color/material_grey_600" />
             <TextView
                 android:id="@+id/info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="地点 "
                 android:layout_alignParentTop="true"
-                android:layout_toEndOf="@+id/time" />
+                android:layout_toEndOf="@+id/time"
+                android:textSize="@dimen/abc_action_bar_overflow_padding_end_material"
+                android:textColor="@color/material_grey_600" />
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="20dp"
-                android:background="#880000"
+                android:layout_width="40dp"
+                android:layout_height="15dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:id="@+id/like_and_comment_button" />
+                android:id="@+id/like_and_comment_button"
+                android:background="@drawable/likeandcomment" />
         </RelativeLayout>
 
         <com.example.cromarmot.myapplication.View.WrapViewGroup
@@ -166,7 +216,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:id="@+id/likes_usergroup">
+            android:id="@+id/likes_usergroup"
+            android:background="#efefef">
 
         </com.example.cromarmot.myapplication.View.WrapViewGroup>
 
@@ -176,7 +227,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:id="@+id/comments_view"
-            android:background="@color/ripple_material_light">
+            android:background="#efefef">
 
             <TextView
                 android:layout_width="match_parent"

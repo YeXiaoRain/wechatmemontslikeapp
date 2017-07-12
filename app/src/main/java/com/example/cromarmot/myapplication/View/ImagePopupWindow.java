@@ -7,8 +7,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.example.cromarmot.myapplication.R;
 
@@ -25,8 +27,8 @@ public class ImagePopupWindow extends PopupWindow {
 
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        //this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
-        //this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
+        this.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        this.setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
 
         mContentView = mInflater.inflate(R.layout.image_display,null);
         setContentView(mContentView);
@@ -45,12 +47,27 @@ public class ImagePopupWindow extends PopupWindow {
                 return false;
             }
         });
+
+
+        ImageView iv = (ImageView)mContentView.findViewById(R.id.single_image_view);
+
+        ((RelativeLayout) iv.getParent()).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupWindowManager.ipw.dismiss();
+            }
+        });
+        iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupWindowManager.ipw.dismiss();
+            }
+        });
     }
     public void show(Bitmap bm){
         this.showAtLocation(mContentView, Gravity.CENTER, 0, 0);
         ImageView imageView = (ImageView) mContentView.findViewById(R.id.single_image_view);
         imageView.setImageBitmap(bm);
-        this.update(800,800);//screen width height
     }
 
 }

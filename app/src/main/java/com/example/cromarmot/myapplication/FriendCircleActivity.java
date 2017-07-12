@@ -12,11 +12,8 @@ import com.example.cromarmot.myapplication.Data.FakeDataRequest;
 import com.example.cromarmot.myapplication.Data.PostDataManager;
 import com.example.cromarmot.myapplication.Data.PostEach;
 import com.example.cromarmot.myapplication.Data.UserEach;
-import com.example.cromarmot.myapplication.View.CommentPopupWindow;
-import com.example.cromarmot.myapplication.View.DeletePopupWindow;
 import com.example.cromarmot.myapplication.View.FcScrollerListener;
-import com.example.cromarmot.myapplication.View.ImagePopupWindow;
-import com.example.cromarmot.myapplication.View.LikeCommentPopupWindow;
+import com.example.cromarmot.myapplication.View.PopupWindowManager;
 import com.example.cromarmot.myapplication.View.ScollerFreshableListView;
 
 import java.util.HashMap;
@@ -32,14 +29,9 @@ public class FriendCircleActivity extends AppCompatActivity implements FcScrolle
     private Map<Integer,UserEach> mUsermap = null;
 
     private Context mContext;
+
     private ScollerFreshableListView list_fc;
-
     private FriendCircleAdapter mAdapter = null;
-    private LikeCommentPopupWindow lcpw;
-
-    private ImagePopupWindow ipw;
-    private CommentPopupWindow cpw;
-    private DeletePopupWindow dpw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +41,7 @@ public class FriendCircleActivity extends AppCompatActivity implements FcScrolle
         mContext = FriendCircleActivity.this;
 
         FakeDataRequest.setContext(mContext);
-        ipw = new ImagePopupWindow(mContext);
-        cpw = new CommentPopupWindow(mContext);
-        dpw = new DeletePopupWindow(mContext);
-        lcpw = new LikeCommentPopupWindow(mContext,cpw);
+        PopupWindowManager.init(mContext);
 
         list_fc = (ScollerFreshableListView) findViewById(R.id.friendcircle_displaylist);
 
@@ -62,7 +51,7 @@ public class FriendCircleActivity extends AppCompatActivity implements FcScrolle
         mUsermap = new HashMap<>();
         PostDataManager.SetUsers(mUsermap);
 
-        mAdapter = new FriendCircleAdapter((LinkedList<PostEach>) mData, mContext,mUsermap,ipw,lcpw,cpw,dpw);
+        mAdapter = new FriendCircleAdapter((LinkedList<PostEach>) mData, mContext,mUsermap);
         PostDataManager.SetAdapter(mAdapter);
 
         LinkedList<PostEach> newpostdata= FakeDataRequest.getPostListFrom(lastget++);

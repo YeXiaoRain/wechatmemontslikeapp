@@ -14,8 +14,6 @@ public class CommentEachView extends TextView  implements View.OnClickListener,V
     private boolean isCurrentUserPost;
     private int postIndex;
     private int commentsIndex;
-    private CommentPopupWindow cpw;
-    private DeletePopupWindow dpw;
 
     public CommentEachView(Context context) {
         super(context);
@@ -29,12 +27,10 @@ public class CommentEachView extends TextView  implements View.OnClickListener,V
         super(context, attrs, defStyleAttr);
     }
 
-    public void init(Boolean icup,int pi,int ci,CommentPopupWindow commentPopupWindow,DeletePopupWindow deletePopupWindow){
+    public void init(Boolean icup,int pi,int ci){
         isCurrentUserPost = icup;
         postIndex = pi;
         commentsIndex = ci;
-        cpw = commentPopupWindow;
-        dpw = deletePopupWindow;
         setListener();
     }
 
@@ -47,14 +43,14 @@ public class CommentEachView extends TextView  implements View.OnClickListener,V
 
     @Override
     public void onClick(View v) {
-        cpw.show(postIndex, PostDataManager.getPostByIndex(postIndex).getComments().get(commentsIndex).getFromid());
+        PopupWindowManager.cpw.show(postIndex, PostDataManager.getPostByIndex(postIndex).getComments().get(commentsIndex).getFromid());
     }
 
     @Override
     public boolean onLongClick(View v) {
         int[] location = new int[2];
         v.getLocationOnScreen(location);
-        dpw.show(location,postIndex,commentsIndex);
+        PopupWindowManager.dpw.show(location,postIndex,commentsIndex);
         return true;
     }
 }

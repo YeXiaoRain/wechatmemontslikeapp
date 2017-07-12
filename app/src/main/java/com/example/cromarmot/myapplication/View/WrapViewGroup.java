@@ -35,7 +35,6 @@ public class WrapViewGroup extends ViewGroup {
         int rows = 1;
         for(int i=0;i<childCount;i++){
             View view = getChildAt(i);
-            view.setBackgroundColor(Color.GREEN);
             int width = view.getMeasuredWidth();
             int height = view.getMeasuredHeight();
             x += width+TEXT_MARGIN;

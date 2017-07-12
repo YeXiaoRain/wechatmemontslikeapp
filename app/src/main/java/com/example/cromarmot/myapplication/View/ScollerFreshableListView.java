@@ -7,7 +7,6 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.example.cromarmot.myapplication.R;
-import com.example.cromarmot.myapplication.View.FcScrollerListener;
 
 /**
  * Created by cromarmot on 17-7-5.
