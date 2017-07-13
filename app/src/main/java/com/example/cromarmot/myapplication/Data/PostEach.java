@@ -11,7 +11,7 @@ import java.util.List;
 public class PostEach {
     private int uid;
     private int upostid;
-    private Bitmap [] images ;
+    private List<String> imagesUrl ;
     private String data;
     private String date;
     private String special;
@@ -21,25 +21,10 @@ public class PostEach {
 
     static public Integer currentPostIndex = -1;
 
-    // photos
-    public PostEach(int id, int upid, Bitmap [] ims, String da, String de, String sp, List<Integer> l, List<CommentEach> c){
-        this(id,upid,ims,da,de,sp,l,c,"");
-    }
-
-    // share
-    public PostEach(int id, int upid, String shareurl, String da, String de, String sp, List<Integer> l, List<CommentEach> c){
-        this(id,upid,null,da,de,sp,l,c,shareurl);
-    }
-
-    // text only
-    public PostEach(int id, int upid, String da, String de, String sp, List<Integer> l, List<CommentEach> c){
-        this(id,upid,null,da,de,sp,l,c,"");
-    }
-
-    private PostEach(int id, int upid, Bitmap [] ims, String da, String de, String sp, List<Integer> l, List<CommentEach> c,String su){
+    public PostEach(int id, int upid, List<String> imgurl, String da, String de, String sp, List<Integer> l, List<CommentEach> c, String su){
         uid=id;
         upostid = upid;
-        images = ims;
+        imagesUrl = imgurl;
         data = da;
         date = de;
         special = sp;
@@ -55,8 +40,12 @@ public class PostEach {
         return upostid;
     }
 
-    public Bitmap[] getImages() {
-        return images;
+    public List<String> getImagesUrl() {
+        return imagesUrl;
+    }
+
+    public void setImagesUrl(List<String> imagesUrl) {
+        this.imagesUrl = imagesUrl;
     }
 
     public String getData() {

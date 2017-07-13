@@ -54,7 +54,8 @@ public class FriendCircleActivity extends AppCompatActivity implements FcScrolle
         mAdapter = new FriendCircleAdapter((LinkedList<PostEach>) mData, mContext,mUsermap);
         PostDataManager.SetAdapter(mAdapter);
 
-        LinkedList<PostEach> newpostdata= FakeDataRequest.getPostListFrom(lastget++);
+        List<PostEach> newpostdata= FakeDataRequest.getPostListFrom(lastget++);
+
         mData.addAll(newpostdata);
         mUsermap.put(PostDataManager.CURRENTUSERID, FakeDataRequest.getUser(PostDataManager.CURRENTUSERID));
         PostDataManager.autoUpdateUsersByNewPost(newpostdata);
@@ -69,7 +70,7 @@ public class FriendCircleActivity extends AppCompatActivity implements FcScrolle
             @Override
             protected Void doInBackground(Void... params) {
                 SystemClock.sleep(1000);
-                LinkedList<PostEach> newdatagroup = FakeDataRequest.getPostListFrom(lastget++)  ;
+                List<PostEach> newdatagroup = FakeDataRequest.getPostListFrom(lastget++)  ;
                 if(newdatagroup!=null)
                     mData.addAll(newdatagroup);
                 return null;

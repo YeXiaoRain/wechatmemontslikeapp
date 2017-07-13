@@ -12,23 +12,11 @@ public class UserEach {
     private int uid;
     private String uname;
     private String imagepath;
-    private Bitmap uimage = null;
-
-    public UserEach(int id, String n, Bitmap bm) {
-        uid = id;
-        uname = n;
-        imagepath = "";
-        uimage = bm;
-    }
 
     public UserEach(int id, String n, String ip) {
         uid = id;
         uname = n;
         imagepath = ip;
-        File file = new File(imagepath);
-        if (file.exists()) {
-            uimage = BitmapFactory.decodeFile(imagepath);
-        }
     }
 
     public int getUid() {
@@ -55,11 +43,4 @@ public class UserEach {
         this.imagepath = imagepath;
     }
 
-    public Bitmap getUimage() {
-        return uimage;
-    }
-
-    public void setUimage(Bitmap uimage) {
-        this.uimage = uimage;
-    }
 }

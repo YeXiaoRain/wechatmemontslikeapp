@@ -76,7 +76,7 @@ public class PostDataManager {
     }
 
     //TODO =.= in real , the list should be user's friend list
-    static public void autoUpdateUsersByNewPost(LinkedList<PostEach> p){
+    static public void autoUpdateUsersByNewPost(List<PostEach> p){
         int i=0,maxi=p.size();
         for(;i<maxi;i++){
             Integer uid =  p.get(i).getUid();
@@ -122,7 +122,11 @@ public class PostDataManager {
 
     public static void shareWebSite(String url){
         assert (url!=null && !url.equals(""));
-        mPostData.add(0,new PostEach(CURRENTUSERID, new Random().nextInt(),url,"","1 min ago",url,null,null));
+        mPostData.add(0,new PostEach(CURRENTUSERID, new Random().nextInt(),null,"","1 min ago",url,null,null,url));
+        mAdapter.notifyDataSetChanged();
+    }
+
+    public static void successGotImage(){
         mAdapter.notifyDataSetChanged();
     }
 }

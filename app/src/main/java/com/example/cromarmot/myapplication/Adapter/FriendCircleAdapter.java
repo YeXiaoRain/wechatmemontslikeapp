@@ -16,14 +16,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.cromarmot.myapplication.Data.CommentEach;
+import com.example.cromarmot.myapplication.Data.ImgManager;
 import com.example.cromarmot.myapplication.Data.PostEach;
 import com.example.cromarmot.myapplication.Data.PostDataManager;
 import com.example.cromarmot.myapplication.R;
 import com.example.cromarmot.myapplication.Data.UserEach;
 import com.example.cromarmot.myapplication.ShareActivity;
 import com.example.cromarmot.myapplication.View.CommentEachView;
+import com.example.cromarmot.myapplication.View.NetServiceTask;
 import com.example.cromarmot.myapplication.View.OnClickDisplayImgView;
 import com.example.cromarmot.myapplication.View.PopupWindowManager;
+import com.example.cromarmot.myapplication.View.URLPostHandler;
 import com.example.cromarmot.myapplication.View.WrapViewGroup;
 
 import java.util.LinkedList;
@@ -86,7 +89,8 @@ public class FriendCircleAdapter extends BaseAdapter{
 
         UserEach u = mUsermap.get(new Integer(correspondingdata.getUid()));
 
-        img_avatar.setImageBitmap(u.getUimage());
+        img_avatar.setImageBitmap(ImgManager.getBitmapByUrl(u.getImagepath()));
+
         txt_uname.setText(u.getUname());
 
         String da = correspondingdata.getData();
@@ -100,6 +104,48 @@ public class FriendCircleAdapter extends BaseAdapter{
         txt_ptime.setText(correspondingdata.getDate());
         txt_pinfo.setText(correspondingdata.getSpecial());
 
+
+        //new images
+        List<String> imgsurl = correspondingdata.getImagesUrl();
+
+        if(imgsurl==null || imgsurl.size() == 0){
+            img_pimage.setVisibility(View.GONE);
+            layout_imggroup.setVisibility(View.GONE);
+        }else if(imgsurl.size() == 1){
+            img_pimage.setVisibility(View.VISIBLE);
+            layout_imggroup.setVisibility(View.GONE);
+            img_pimage.setImageBitmap(ImgManager.getBitmapByUrl(imgsurl.get(0)));
+            img_pimage.setLargeimg(ImgManager.getBitmapByUrl(imgsurl.get(0))); //modified 2 only url save?
+            img_pimage.setIPW(PopupWindowManager.ipw);
+        }else{
+            img_pimage.setVisibility(View.GONE);
+            layout_imggroup.setVisibility(View.VISIBLE);
+            OnClickDisplayImgView [] imgviews={
+                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul0),
+                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul1),
+                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul2),
+                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul3),
+                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul4),
+                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul5),
+                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul6),
+                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul7),
+                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul8),
+            };
+            int j,maxj=imgsurl.size();
+            for(j=0;j<9;j++){
+                imgviews[j].setIPW(PopupWindowManager.ipw);
+            }
+            for(j=0;j<maxj;j++){
+                imgviews[j].setVisibility(View.VISIBLE);
+                imgviews[j].setImageBitmap(ImgManager.getBitmapByUrl(imgsurl.get(j)));
+                imgviews[j].setLargeimg(ImgManager.getBitmapByUrl(imgsurl.get(j)));//same as above
+            }
+            for(;j<9;j++) {
+                imgviews[j].setVisibility(View.GONE);
+            }
+        }
+
+        /*
         Bitmap [] imgs = correspondingdata.getImages();
         if(imgs==null || imgs.length==0){
             img_pimage.setVisibility(View.GONE);
@@ -137,6 +183,7 @@ public class FriendCircleAdapter extends BaseAdapter{
                 imgviews[j].setVisibility(View.GONE);
             }
         }
+        */
 
         img_landcview.setOnClickListener(new View.OnClickListener() {
             @Override
