@@ -2,9 +2,13 @@ package com.example.cromarmot.myapplication.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +27,8 @@ import com.example.cromarmot.myapplication.R;
 import com.example.cromarmot.myapplication.Data.UserEach;
 import com.example.cromarmot.myapplication.ShareActivity;
 import com.example.cromarmot.myapplication.View.CommentEachView;
-import com.example.cromarmot.myapplication.View.NetServiceTask;
 import com.example.cromarmot.myapplication.View.OnClickDisplayImgView;
 import com.example.cromarmot.myapplication.View.PopupWindowManager;
-import com.example.cromarmot.myapplication.View.URLPostHandler;
 import com.example.cromarmot.myapplication.View.WrapViewGroup;
 
 import java.util.LinkedList;
@@ -105,9 +107,7 @@ public class FriendCircleAdapter extends BaseAdapter{
         txt_pinfo.setText(correspondingdata.getSpecial());
 
 
-        //new images
         List<String> imgsurl = correspondingdata.getImagesUrl();
-
         if(imgsurl==null || imgsurl.size() == 0){
             img_pimage.setVisibility(View.GONE);
             layout_imggroup.setVisibility(View.GONE);
@@ -145,46 +145,6 @@ public class FriendCircleAdapter extends BaseAdapter{
             }
         }
 
-        /*
-        Bitmap [] imgs = correspondingdata.getImages();
-        if(imgs==null || imgs.length==0){
-            img_pimage.setVisibility(View.GONE);
-            layout_imggroup.setVisibility(View.GONE);
-        }else if(imgs.length==1){
-            img_pimage.setVisibility(View.VISIBLE);
-            layout_imggroup.setVisibility(View.GONE);
-            img_pimage.setImageBitmap(imgs[0]);
-            img_pimage.setLargeimg(imgs[0]);
-            img_pimage.setIPW(PopupWindowManager.ipw);
-        }else{
-            img_pimage.setVisibility(View.GONE);
-            layout_imggroup.setVisibility(View.VISIBLE);
-            OnClickDisplayImgView [] imgviews={
-                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul0),
-                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul1),
-                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul2),
-                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul3),
-                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul4),
-                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul5),
-                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul6),
-                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul7),
-                    (OnClickDisplayImgView) layout_imggroup.findViewById(R.id.imgmul8),
-            };
-            int j,maxj=imgs.length;
-            for(j=0;j<9;j++){
-                imgviews[j].setIPW(PopupWindowManager.ipw);
-            }
-            for(j=0;j<maxj;j++){
-                imgviews[j].setVisibility(View.VISIBLE);
-                imgviews[j].setImageBitmap(imgs[j]);
-                imgviews[j].setLargeimg(imgs[j]);
-            }
-            for(;j<9;j++) {
-                imgviews[j].setVisibility(View.GONE);
-            }
-        }
-        */
-
         img_landcview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -208,8 +168,6 @@ public class FriendCircleAdapter extends BaseAdapter{
             for(j=0;j<maxj;j++){
                 TextView tv = new TextView(mContext);
                 tv.setText((mUsermap.get(likes.get(j))).getUname());
-                //tv.setTextColor(0x575f6a);
-                //tv.setTextColor(0x000000);
                 wrapview_likes.addView(tv);
             }
         }
@@ -221,11 +179,40 @@ public class FriendCircleAdapter extends BaseAdapter{
             CommentEach tmp_comment = comments.get(j);
             CommentEachView cev=new CommentEachView(mContext);
             cev.init(tmp_comment.getFromid() == PostDataManager.CURRENTUSERID ,i,j);
-            cev.setText(PostDataManager.uid2uname(tmp_comment.getFromid())
-                    +" write to "
-                    +PostDataManager.uid2uname(tmp_comment.getToid())
-                    +" : "
-                    +tmp_comment.getData());
+            cev.setText("");
+
+            SpannableString spStringFrom = new SpannableString(PostDataManager.uid2uname(tmp_comment.getFromid()));
+            spStringFrom.setSpan(new ClickableSpan() {
+                @Override
+                public void updateDrawState(TextPaint ds) {
+                    super.updateDrawState(ds);
+                    ds.setColor(Color.BLUE);
+                    ds.setUnderlineText(false);
+                }
+                @Override
+                public void onClick(View widget) {
+                }
+            },0,spStringFrom.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            cev.append(spStringFrom);
+
+            cev.append(" @ ");
+
+            SpannableString spStringTo = new SpannableString(PostDataManager.uid2uname(tmp_comment.getToid()));
+            spStringTo.setSpan(new ClickableSpan() {
+                @Override
+                public void updateDrawState(TextPaint ds) {
+                    super.updateDrawState(ds);
+                    ds.setColor(Color.BLUE);
+                    ds.setUnderlineText(false);
+                }
+                @Override
+                public void onClick(View widget) {
+                }
+
+            },0,spStringTo.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            cev.append(spStringTo);
+
+            cev.append(" : "+tmp_comment.getData());
             llayout_comment.addView(cev);
         }
 

@@ -26,7 +26,6 @@ public class ImgManager {
             NetServiceTask netServerTask= new NetServiceTask(url,new URLPostHandler() {
                 @Override
                 public void PostHandler(Bitmap bitmap) {
-                    System.out.println("POSTHANDLERRR");
                 }
             });
             netServerTask.run();

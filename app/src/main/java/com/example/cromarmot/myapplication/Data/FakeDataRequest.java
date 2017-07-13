@@ -1,15 +1,6 @@
 package com.example.cromarmot.myapplication.Data;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import com.example.cromarmot.myapplication.R;
-
-import org.json.JSONArray;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -20,44 +11,10 @@ public class FakeDataRequest {
     public static void setContext(Context mc){
         mContext=mc;
     }
-    // TODO add json to javadatastructure
     public static List<PostEach> getPostListFrom(int date){
-        switch (date){
-            case 100:{
-                //mData.add(new PostEach(1, 12,"post data here","1 hour ago","",new ArrayList<Integer>(){{add(4);add(2);add(3);add(5);add(6);add(7);add(8);}},null));
-
-                //Bitmap[] bm_picsingle;
-                //bm_picsingle=new Bitmap[1];
-                //bm_picsingle[0]= BitmapFactory.decodeResource(mContext.getResources(), R.drawable.p1);
-                //mData.add(new PostEach(2, 22,bm_picsingle,"demotextdemotextdemotextdemotextdemotextdemotext","2 hours ago","",null,null));
-
-                //Bitmap [] bm_picmul;
-                //bm_picmul=new Bitmap[5];
-                //bm_picmul[0]=BitmapFactory.decodeResource(mContext.getResources(), R.drawable.p1);
-                //bm_picmul[1]=BitmapFactory.decodeResource(mContext.getResources(), R.drawable.p1);
-                //bm_picmul[2]=BitmapFactory.decodeResource(mContext.getResources(), R.drawable.p1);
-                //bm_picmul[3]=BitmapFactory.decodeResource(mContext.getResources(), R.drawable.p1);
-                //bm_picmul[4]=BitmapFactory.decodeResource(mContext.getResources(), R.drawable.p2);
-                //mData.add(new PostEach(3, 32,bm_picmul,"neirongneirongneirongneirongneirongneirongneirong","10:20","from alipay",new ArrayList<Integer>(){{add(3);add(5);add(7);}},null));
-
-                //List<CommentEach> democomment = new ArrayList<>();
-                //democomment.add(new CommentEach(2,3,"hello"));
-                //democomment.add(new CommentEach(3,2,"thank you"));
-                //democomment.add(new CommentEach(4,3,"thank you very much ! !! ! !! ! !!!"));
-                //mData.add(new PostEach(4, 42,"demotextdemotext","3 hours ago","",null,democomment));
-
-                //mData.add(new PostEach(5, 52, "https://exxxxample","demotextdemotextdemotextdemotextdemotext","3 hours ago","",null,null));
-                //mData.add(new PostEach(6, 62,"demotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotext","3 hours ago","",null,null));
-                //mData.add(new PostEach(7, 72,"demotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotext","3 hours ago","from firefox",null,null));
-                //return mData;
-                return null;
-            }
-            default: {
-                String parserString = fakeJSONprovider(date);
-                System.out.println("parserString:" + parserString);
-                return JSONparser.parsePosts(parserString);
-            }
-        }
+        String parserString = fakeJSONprovider(date);
+        System.out.println("parse String:" + parserString);
+        return JSONparser.parsePosts(parserString);
     }
 
     public static UserEach getUser(int uid){
@@ -96,7 +53,7 @@ public class FakeDataRequest {
                             "[4,3,\"thank you very much !! !! !! !! !! !!\"]],\"\"]"+","+
                         "[5,52, [], \"demotextdemotextdemotextdemotextdemotext\", \"3 hours ago\", \"\", [],[],\"https://exxxxample\"]"+","+
                         "[6,62, [] , \"demotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotext\", \"3 hours ago\", \"\",[], [],\"\"]"+","+
-                        "[7,72, \"demotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotext\", \"3 hours ago\", \"from firefox\",[],[],\"\"]"+
+                        "[7,72, [] , \"demotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotextdemotext\", \"3 hours ago\", \"from firefox\",[],[],\"\"]"+
                "]";
 
             case 1:

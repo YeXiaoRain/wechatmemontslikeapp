@@ -63,15 +63,15 @@ public class JSONparser {
         return res;
     }
 
-    private  static List<CommentEach> parseComments(String likes){
+    private  static List<CommentEach> parseComments(String comments){
         List<CommentEach> res = null;
         try {
-            JSONArray jsonArray = new JSONArray(likes);
+            JSONArray jsonArray = new JSONArray(comments);
             if(jsonArray.length() == 0)
                 return res;
             res = new ArrayList<>();
             for(int i = 0;i < jsonArray.length();i++){
-                JSONArray jsonEach = new JSONArray(jsonArray);
+                JSONArray jsonEach = jsonArray.getJSONArray(i);
                 res.add(new CommentEach(jsonEach.getInt(0),jsonEach.getInt(1),jsonEach.getString(2)));
             }
         } catch (JSONException e) {

@@ -2,7 +2,6 @@ package com.example.cromarmot.myapplication.Data;
 
 import com.example.cromarmot.myapplication.Adapter.FriendCircleAdapter;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -100,18 +99,9 @@ public class PostDataManager {
     }
 
     static public PostEach getPostByIndex(int postindex){
-        int i=0,maxi = mPostData.size();
-        if(postindex >= 0 && postindex < maxi)
-            return mPostData.get(postindex);
-        return null;
-    }
-    //TODO speed up and redesign struct fit both search and display
-    static  private PostEach getPostByID(int postid){
-        int i=0,maxi=mPostData.size();
-        for(;i<maxi;++i)
-            if(mPostData.get(i).getUpostid()==postid)
-                return mPostData.get(i);
-        return null;
+        return postindex >= 0 && postindex < mPostData.size()?
+                mPostData.get(postindex):
+                null;
     }
 
     public static String uid2uname(int uid){

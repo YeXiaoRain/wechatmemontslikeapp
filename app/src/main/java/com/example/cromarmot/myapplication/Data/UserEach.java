@@ -1,10 +1,5 @@
 package com.example.cromarmot.myapplication.Data;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import java.io.File;
-
 /**
  * Created by cromarmot on 17-7-4.
  */

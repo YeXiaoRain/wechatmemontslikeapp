@@ -7,7 +7,6 @@ package com.example.cromarmot.myapplication.View;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
-import android.widget.ImageView;
 
 import com.example.cromarmot.myapplication.Data.ImgManager;
 import com.example.cromarmot.myapplication.Data.PostDataManager;
@@ -24,7 +23,6 @@ public class NetServiceTask extends AsyncTask<String,Integer,Bitmap>{
     }
     @Override
     protected Bitmap doInBackground(String... arg0) {
-        System.out.println(1);
         InputStream inputStream=NetService.getInputStreamByUrl(arg0[0]);
         if(inputStream!=null){
             return BitmapFactory.decodeStream(new BufferedInputStream(inputStream));

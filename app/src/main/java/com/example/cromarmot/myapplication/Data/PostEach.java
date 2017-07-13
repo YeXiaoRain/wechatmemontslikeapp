@@ -1,6 +1,5 @@
 package com.example.cromarmot.myapplication.Data;
 
-import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 import java.util.List;
